@@ -10,58 +10,77 @@ const terminal = require(__lib + '/terminal');
 
 module.exports = {
     register: async (credentials) => {
-        var response = await request.restRegister(credentials);
-        console.log(response);
+        return request.restRegister(credentials)
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            throw error
+        })
     },
 
     login: async (credentials) => {
-        var access = await request.restLogin(credentials);
-        await fileSystem.configJsonSave(access.token, access.key);
+        return request.restLogin(credentials)
+        .then((response) => {
+            return fileSystem.configJsonSave(response.token, response.key)
+            .then((response) => {
+                return response
+            })
+            .catch((error) => {
+                throw error
+            })
+        }).catch((error) => {
+            throw error
+        })
     },
 
     create: async (options) => {
-        if(await request.restValidateToken(await fileSystem.configJsonToken()) == false) {
-            console.log("Invalid token, please run:\n\n$ totalcross login\n\nor totalcross --help for more information");
-            return -1
-        };
-        
-        options.key = await fileSystem.configJsonKey()
-        
+        return fileSystem.configJsonKey()
+        .then(async (response) => {
+            options.key = response; 
 
-        let path = './' + options.artifactId;
-        let package = path + '/src/main/java/' + options.groupId.replace(/\./g, "/");
-        await fileSystem.makeDir(path);
-        await fileSystem.makeDir(package);
-        await fileSystem.makeDir(path + '/src/main/resources');
-        await fileSystem.makeDir(path + '/src/test');
-        
-        await fileSystem.setupFile(__resources + '/pom.xml', path + '/pom.xml', options);
-        await fileSystem.setupFile(__resources + '/Sample.java', `${package}/${options.artifactId}.java`, options);
-        await fileSystem.setupFile(__resources + '/TestSampleApplication.java',`${package}/Run${options.artifactId}Application.java`, options);
+            let path = './' + options.artifactId;
+            let package = path + '/src/main/java/' + options.groupId.replace(/\./g, "/");
+            await fileSystem.makeDir(path);
+            await fileSystem.makeDir(package);
+            await fileSystem.makeDir(path + '/src/main/resources');
+            await fileSystem.makeDir(path + '/src/test');
+            
+            await fileSystem.setupFile(__resources + '/pom.xml', path + '/pom.xml', options);
+            await fileSystem.setupFile(__resources + '/Sample.java', `${package}/${options.artifactId}.java`, options);
+            await fileSystem.setupFile(__resources + '/TestSampleApplication.java',`${package}/Run${options.artifactId}Application.java`, options);    
+            
+            return 'Project created'
+        })
+        .catch((error) => {
+            throw error
+        })
     },
 
     build: async () => {
-        if(await request.restValidateToken(await fileSystem.configJsonToken()) == false) {
-            console.log("Invalid token, please run:\n\n$ totalcross login\n\nor totalcross --help for more information");
-            return -1
-        };
-
-        await terminal.run('mvn package');
+        return terminal.run('mvn package')
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            throw error
+        })
     },
 
     deploy: async (options) => {
-        if(await request.restValidateToken(await fileSystem.configJsonToken()) == false) {
-            console.log("Invalid token, please run:\n\n$ totalcross login\n\nor totalcross --help for more information");
-            return -1
-        };
-        
-        await terminal.scp({
+        return terminal.scp({
             file: 'target/install/linux_arm/*',
             user: options.username,
             host: options.host,
             port: '22',
             path: options.path
-        });
+        })
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            throw error
+        })
     },
 
     versions: async () => {
@@ -70,6 +89,22 @@ module.exports = {
         } else {
             return await request.mavenMetadataVersions();
         }
+    },
+
+    auth: async () => {
+        return fileSystem.configJsonToken()
+        .then((response) => {
+            return request.restValidateToken(response)
+            .then((response) => {
+                return `Auth is ${response}`
+            })
+            .catch((error) => {
+                throw error
+            })
+        })
+        .catch((error) => {
+            throw error
+        })
     }
 }
 
