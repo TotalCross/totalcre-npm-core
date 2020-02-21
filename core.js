@@ -68,13 +68,7 @@ module.exports = {
     },
 
     deploy: async (options) => {
-        return terminal.scp({
-            file: 'target/install/linux_arm/*',
-            user: options.username,
-            host: options.host,
-            port: '22',
-            path: options.path
-        })
+        return terminal.run(`scp target/install/linux_arm/* ${options.username}@${options.host}:${options.path}`)
         .then((response) => {
             return response
         })

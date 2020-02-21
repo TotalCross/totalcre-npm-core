@@ -29,37 +29,54 @@ const core = require('../core');
 // })
 
 // Create
-core.auth()
-.then(() => {
-    core.create({
-        groupId: 'com.totalcross', 
-        artifactId: 'HelloWorld', 
-        version: '6.0.2', 
-        platforms: ['-android', '-linux_arm']
-    })
-    .then((response) => {
-        console.log(response);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+// core.auth()
+// .then(() => {
+//     core.create({
+//         groupId: 'com.totalcross', 
+//         artifactId: 'HelloWorld', 
+//         version: '6.0.2', 
+//         platforms: ['-android', '-linux_arm']
+//     })
+//     .then((response) => {
+//         console.log(response);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
+// })
+// .catch((error) => {
+//     console.log(error);
+// })
+
+
+// /// Build (package)
+// core.auth()
+// .then(() => {
+//     core.package()
+//     .then((response) => {
+//         console.log(response);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
+// })
+// .catch((error) => {
+//     console.log(error);
+// })
+
+
+core.package()
+.then((response) => {
+    console.log(response);
 })
 .catch((error) => {
     console.log(error);
 })
 
-
-/// Build (package)
-core.auth()
-.then(() => {
-    core.package()
-    .then((response) => {
-        console.log(response);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-})
-.catch((error) => {
-    console.log(error);
-})
+// core.deploy({username: 'allan', host: '127.0.0.1', path: '~/'})
+// .then((response) => {
+//     console.log(response);
+// })
+// .catch((error) => {
+//     console.log(error);
+// })

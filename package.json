@@ -1,6 +1,6 @@
 {
   "name": "totalcross-core-dev",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "TotalCross core functions. Ready to use as library!",
   "main": "core.js",
   "scripts": {
@@ -21,7 +21,6 @@
     "replace-in-file": "^5.0.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "scp": "0.0.3",
     "xml-js": "^1.6.11"
   }
 }
