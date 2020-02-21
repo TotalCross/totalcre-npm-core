@@ -1,0 +1,27 @@
+{
+  "name": "totalcross-core-dev",
+  "version": "0.0.3",
+  "description": "TotalCross core functions. Ready to use as library!",
+  "main": "core.js",
+  "scripts": {
+    "test": "null"
+  },
+  "keywords": [
+    "TotalCross",
+    "Core",
+    "CLI",
+    "Plugin"
+  ],
+  "author": "Allan C., @acmlira",
+  "license": "MIT",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "fs-extra": "^8.1.0",
+    "os": "^0.1.1",
+    "replace-in-file": "^5.0.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "scp": "0.0.3",
+    "xml-js": "^1.6.11"
+  }
+}
