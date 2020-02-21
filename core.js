@@ -9,8 +9,8 @@ const request = require(__lib + '/request');
 const terminal = require(__lib + '/terminal');
 
 module.exports = {
-    register: async (credentials) => {
-        return request.restRegister(credentials)
+    register: async (options) => {
+        return request.restRegister(options)
         .then((response) => {
             return response
         })
@@ -19,8 +19,8 @@ module.exports = {
         })
     },
 
-    login: async (credentials) => {
-        return request.restLogin(credentials)
+    login: async (options) => {
+        return request.restLogin(options)
         .then((response) => {
             return fileSystem.configJsonSave(response.token, response.key)
             .then((response) => {
@@ -57,7 +57,7 @@ module.exports = {
         })
     },
 
-    build: async () => {
+    package: async () => {
         return terminal.run('mvn package')
         .then((response) => {
             return response
@@ -94,7 +94,7 @@ module.exports = {
     auth: async () => {
         return fileSystem.configJsonToken()
         .then((response) => {
-            return request.restValidateToken(response)
+            return request.restValidate({token: response})
             .then((response) => {
                 return `Auth is ${response}`
             })

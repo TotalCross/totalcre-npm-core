@@ -1,5 +1,7 @@
 const core = require('../core'); 
 
+
+// Register
 // core.register({
 //     username: 'Jeff123',
 //     email: 'jeffdododo1234@gmail.com',
@@ -13,6 +15,8 @@ const core = require('../core');
 //     console.log(error);
 // });
 
+
+// Login
 // core.login({
 //     email: 'jeffdododo1234@gmail.com', 
 //     password: '123456'
@@ -24,6 +28,7 @@ const core = require('../core');
 //     console.log(error);
 // })
 
+// Create
 core.auth()
 .then(() => {
     core.create({
@@ -43,9 +48,11 @@ core.auth()
     console.log(error);
 })
 
+
+/// Build (package)
 core.auth()
 .then(() => {
-    core.build()
+    core.package()
     .then((response) => {
         console.log(response);
     })
