@@ -17,36 +17,36 @@ const core = require('../core');
 
 
 // Login
-core.login({
-    email: 'jeffdododo1234@gmail.com', 
-    password: '123456'
-})
-.then((response) => {
-    console.log(response);
-})
-.catch((error) => {
-    console.log(error);
-})
-
-// Create
-// core.auth()
-// .then(() => {
-//     core.create({
-//         groupId: 'com.totalcross', 
-//         artifactId: 'HelloWorld', 
-//         version: '6.0.2', 
-//         platforms: ['-android', '-linux_arm']
-//     })
-//     .then((response) => {
-//         console.log(response);
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     })
+// core.login({
+//     email: 'type@your.email', 
+//     password: '123456'
+// })
+// .then((response) => {
+//     console.log(response);
 // })
 // .catch((error) => {
 //     console.log(error);
 // })
+
+// Create
+core.auth()
+.then(() => {
+    core.create({
+        groupId: 'com.totalcross', 
+        artifactId: 'HelloWorld', 
+        version: '6.0.2', 
+        platforms: ['-android', '-linux_arm']
+    })
+    .then((response) => {
+        console.log(response);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+})
+.catch((error) => {
+    console.log(error);
+})
 
 
 // /// Build (package)

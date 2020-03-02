@@ -24,7 +24,7 @@ module.exports = {
         .then((response) => {
             return fileSystem.configJsonSave(response.token, response.key)
             .then((response) => {
-                return response
+                if (response = true) return 'You are logged in'
             })
             .catch((error) => {
                 throw error
@@ -90,7 +90,7 @@ module.exports = {
         .then((response) => {
             return request.restValidate({token: response})
             .then((response) => {
-                return `Auth is ${response}`
+                if (response = true) return 'Authentication sucess'
             })
             .catch((error) => {
                 throw error
