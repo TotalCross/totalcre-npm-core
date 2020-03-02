@@ -1,6 +1,6 @@
 {
   "name": "totalcross-core-dev",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "TotalCross core functions. Ready to use as library!",
   "main": "core.js",
   "scripts": {

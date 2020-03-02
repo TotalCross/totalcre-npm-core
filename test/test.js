@@ -17,16 +17,16 @@ const core = require('../core');
 
 
 // Login
-// core.login({
-//     email: 'jeffdododo1234@gmail.com', 
-//     password: '123456'
-// })
-// .then((response) => {
-//     console.log(response);
-// })
-// .catch((error) => {
-//     console.log(error);
-// })
+core.login({
+    email: 'jeffdododo1234@gmail.com', 
+    password: '123456'
+})
+.then((response) => {
+    console.log(response);
+})
+.catch((error) => {
+    console.log(error);
+})
 
 // Create
 // core.auth()
@@ -65,13 +65,13 @@ const core = require('../core');
 // })
 
 
-core.package()
-.then((response) => {
-    console.log(response);
-})
-.catch((error) => {
-    console.log(error);
-})
+// core.package()
+// .then((response) => {
+//     console.log(response);
+// })
+// .catch((error) => {
+//     console.log(error);
+// })
 
 // core.deploy({username: 'allan', host: '127.0.0.1', path: '~/'})
 // .then((response) => {
