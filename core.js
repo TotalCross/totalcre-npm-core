@@ -93,7 +93,6 @@ module.exports = {
         } else {
             versions = await request.mavenMetadataVersions();
         }
-        console.log(versions);
         
         let latestVersions = [versions[0]];
         for (let i = 1; i < versions.length; i++) {
