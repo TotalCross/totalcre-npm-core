@@ -79,10 +79,28 @@ module.exports = {
 
     versions: async () => {
         if (await request.mavenMetadataLastUpdated() == await fileSystem.mavenMetadataLastUpdated(__resources + '/maven-metadata.xml')) {
-            return await filesystem.mavenMetadataVersions(__basedir + '/resources/maven-metadata.xml');
+            return await filesystem.mavenMetadataVersions(__resources + '/maven-metadata.xml');
         } else {
             return await request.mavenMetadataVersions();
         }
+    },
+
+    latestVersions: async () => {
+        let versions;
+
+        if (await request.mavenMetadataLastUpdated() == await fileSystem.mavenMetadataLastUpdated(__resources + '/maven-metadata.xml')) {
+            versions = await filesystem.mavenMetadataVersions(__basedir + '/resources/maven-metadata.xml');
+        } else {
+            versions = await request.mavenMetadataVersions();
+        }
+        console.log(versions);
+        
+        let latestVersions = [versions[0]];
+        for (let i = 1; i < versions.length; i++) {
+            if(versions[i][0] != versions[i-1][0]) latestVersions.push(versions[i])
+        }
+        
+        return latestVersions;
     },
 
     auth: async () => {
@@ -90,7 +108,7 @@ module.exports = {
         .then((response) => {
             return request.restValidate({token: response})
             .then((response) => {
-                if (response = true) return 'Authentication sucess'
+                if (response = true) return 'Authentication success'
             })
             .catch((error) => {
                 throw error
