@@ -60,6 +60,18 @@ module.exports = {
     package: async () => {
         return terminal.run('mvn package')
         .then((response) => {
+            setTimeout(async () => {
+                token = await fileSystem.configJsonToken()
+
+                request.restHistory({token: token, activity: "package"})
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },5000);
+
             return response
         })
         .catch((error) => {
@@ -70,6 +82,18 @@ module.exports = {
     deploy: async (options) => {
         return terminal.run(`scp target/install/linux_arm/* ${options.username}@${options.host}:${options.path}`)
         .then((response) => {
+            setTimeout(() => {
+                token = fileSystem.configJsonToken()
+
+                request.restHistory({token: token, activity: "deploy"})
+                .then((response) => {
+                    // console.log(response);
+                })
+                .catch((error) => {
+                    // console.log(error);
+                })
+            },5000);
+
             return response
         })
         .catch((error) => {
