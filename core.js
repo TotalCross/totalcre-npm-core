@@ -80,7 +80,9 @@ module.exports = {
     },
 
     deploy: async (options) => {
-        return terminal.run(`scp target/install/linux_arm/* ${options.username}@${options.host}:${options.path}`)
+        let command = `scp target/install/linux_arm/* ${options.username}@${options.host}:${options.path}`
+        if (process.platform === "win32") command = `scp target\\install\\linux_arm\\* ${options.username}@${options.host}:${options.path}`
+        return terminal.run(command)
         .then((response) => {
             setTimeout(() => {
                 token = fileSystem.configJsonToken()
