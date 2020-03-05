@@ -25,6 +25,7 @@ module.exports = {
             return fileSystem.configJsonSave(response.token, response.key)
             .then((response) => {
                 if (response = true) return 'You are logged in'
+                return 'Wrong email or password'
             })
             .catch((error) => {
                 throw error
@@ -134,6 +135,7 @@ module.exports = {
             return request.restValidate({token: response})
             .then((response) => {
                 if (response = true) return 'Authentication success'
+                return 'Authentication failed, please, run totalcross login again'
             })
             .catch((error) => {
                 throw error
@@ -144,7 +146,3 @@ module.exports = {
         })
     }
 }
-
-
-
-
