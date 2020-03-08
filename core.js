@@ -22,6 +22,8 @@ module.exports = {
     login: async (options) => {
         return request.restLogin(options)
         .then((response) => {
+            await fileSystem.workDir();
+
             return fileSystem.configJsonSave(response.token, response.key)
             .then((response) => {
                 if (response = true) return 'You are logged in'
