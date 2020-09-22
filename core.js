@@ -3,6 +3,7 @@ global.__lib = __dirname + '/lib';
 global.__rest = 'https://us-central1-totalcross-user-area.cloudfunctions.net/app/api/v1';
 global.__resources = __dirname + '/resources'
 global.__mavenMetadata = 'https://maven.totalcross.com/artifactory/repo1/com/totalcross/totalcross-sdk/maven-metadata.xml';
+global.__mavenPlugin = 'https://maven.totalcross.com/artifactory/repo1/com/totalcross/totalcross-maven-plugin/maven-metadata.xml';
 
 const fileSystem = require(__lib + '/file-system');
 const request = require(__lib + '/request');
@@ -129,6 +130,10 @@ module.exports = {
         }
         
         return latestVersions;
+    },
+
+    mavenPluginLatestVersion: async () => {
+        return await request.mavenPluginLastVersion();
     },
 
     auth: async () => {
